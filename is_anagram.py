@@ -6,6 +6,9 @@ class Solution(object):
         :rtype: bool
         """
 
+        if len(s) != len(t):
+            return False
+
         char_counts = {}
 
         for char in s:
