@@ -18,17 +18,12 @@ class Solution(object):
             else:
                 occurrences[num] = 1
 
-        for i in range(k):
-            max_occurrence = max(occurrences.values())
-            key_to_remove = None
+        buckets = [[] for _ in range(len(nums) + 1)]
+        for num, freq in occurrences.items():
+            buckets[freq].append(num)
 
-            for k, v in occurrences.items():
-                if v == max_occurrence:
-                    output.append(k)
-                    key_to_remove = k
-                    break
-
-            if key_to_remove is not None:
-                del occurrences[key_to_remove]
-
-        return output
+        for i in range(len(buckets) - 1, -1, -1):
+            for num in buckets[i]:
+                output.append(num)
+                if len(output) == k:
+                    return output
